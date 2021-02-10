@@ -1,0 +1,14 @@
+
+<section class="logo-nav">
+    <h1 class="site-title"><a href="/">{{site.title}}</a></h1>
+    <nav class="site-nav">
+        <ul>
+            {% for page in site.pages %}
+                {% if page.title %}
+                <li class="icon-{{page.title |slugify}}"><a href="{{site.baseurl}}{{page.url}}">{{page.title}}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        
+    </nav>
+</section>
