@@ -68,16 +68,17 @@ main {
     background: var( --main-color);
     color: #fff;
     width: 100%;
+
+    .site-nav a {
+        background: none;
+    }
+
+    .site-nav ul {
+        flex-direction: column;
+        font-size: .9rem;
+    }
 }
 
-.site-footer .site-nav a {
-    background: none;
-}
-
-.site-footer .site-nav ul {
-    flex-direction: column;
-    font-size: .9rem;
-}
 
 /* crad */
 
@@ -86,15 +87,21 @@ main {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
     padding: 1em;
     margin: 2em 0;
+
+    p {
+        display: none;
+
+        &:first-of-type {
+            display: block;
+        }
+    }
+
+    .button_more .less {
+        display: none;
+    }
 }
 
-.card p {
-    display: none;
-}
 
-.card p:first-of-type {
-    display: block;
-}
 
 input:checked + .card p {
     display: block;
@@ -108,9 +115,6 @@ input:checked + .card p {
     font-weight: 700;
 }
 
-.card .button_more .less {
-    display: none;
-}
 
 input:checked + .card .button_more .more {
     display: none;
@@ -122,4 +126,11 @@ input:checked + .card .button_more .less {
 
 input#card_id_1_more {
     display: none;
+}
+
+@include bp(phone) {
+    .hero {
+        display: none;
+    }
+    
 }

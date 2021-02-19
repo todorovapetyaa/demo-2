@@ -2,14 +2,20 @@
 
 let gulp = require("gulp"),
 	autoprefixer = require("gulp-autoprefixer"),
+	csso = require("gulp-csso"),
+	size = require("gulp-size"),
 	browserSync = require('browser-sync').create(),
 	sass = require('gulp-sass'),
 	cp = require("child_process");
 
 gulp.task("sass", function() {
 	return gulp.src( '_scss/**/*.scss' )
+		.pipe( size() )
 		.pipe( sass().on('error', sass.logError) )
 		.pipe( autoprefixer() )
+		.pipe( size() )
+		// .pipe( csso() )
+		// .pipe( size() )
 		.pipe( gulp.dest( './docs/css/' ) )
 		.pipe( gulp.dest( './css/' ) )
 		.pipe( browserSync.stream({ match: '**/*.css' }) )
@@ -23,7 +29,7 @@ gulp.task("sass", function() {
 
 // Jekyll
 gulp.task("jekyll", function() {
-	return cp.spawn("bundle", ["exec", "jekyll", "build"], { stdio: "inherit", shell: true });
+	return cp.spawn("bundle", ["exec", "jekyll", "build --baseurl ''"], { stdio: "inherit", shell: true });
 });
 
 gulp.task("watch", function() {
@@ -51,8 +57,12 @@ gulp.task("watch", function() {
 });
 
 
-gulp.task("deploy", gulp.series('jekyll', 'sass', function() {
-	return cp.spawn('git status && git commit -am "Update" && git pull && git push', { stdio: "inherit", shell: true });
-}));
+// gulp.task("deploy", gulp.series('jekyll', 'sass', function() {
+// 	return cp.spawn('git status && git commit -am "Update" && git pull && git push', { stdio: "inherit", shell: true });
+// }));
 
 gulp.task("default", gulp.series('jekyll', 'sass', 'watch'));
+
+gulp.task("deploy", function() {
+	return cp.spawn('git status && git commit -am "Update" && git pull && git push', { stdio: "inherit", shell: true });
+});
