@@ -25,14 +25,15 @@ input, textarea, label {
 
 main {
   max-width: 65em;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 1em 2em; }
 
 .site-header {
   display: flex;
   position: relative;
   flex-direction: column;
   padding: 2em;
-  min-height: 80vh;
+  min-height: 50vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=885&q=80");
   background-size: cover;
   background-position: center;
@@ -263,3 +264,57 @@ ul {
 .site-nav .icon-search a::before {
   content: '\f002';
   margin-left: 0.5em; }
+
+.gallery {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: 1em; }
+  @media (max-width: 1024px) {
+    .gallery {
+      grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) {
+    .gallery {
+      grid-template-columns: repeat(2, 1fr); } }
+  .gallery li {
+    list-style: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 0.5em solid #fff;
+    box-shadow: 0px 0px 4px 1px rgba(105, 105, 105, 0.2); }
+    .gallery li::before {
+      display: block;
+      content: '';
+      padding-top: 100%; }
+    .gallery li.portrait {
+      grid-row: span 2; }
+      .gallery li.portrait::before {
+        padding-top: 178%; }
+    .gallery li.landscape {
+      grid-column: span 2; }
+      .gallery li.landscape::before {
+        padding-top: 56.25%; }
+      .gallery li.landscape img {
+        width: 100%;
+        height: auto; }
+  .gallery a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
+  .gallery img {
+    display: block;
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease-in; }
+    .gallery img:hover {
+      transform: scale(1.1) translate(-50%, -50%); }
